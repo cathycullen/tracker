@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101021903) do
+ActiveRecord::Schema.define(version: 20161101042212) do
 
   create_table "coordinators", force: true do |t|
     t.string   "email"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20161101021903) do
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "coordinator_id"
   end
 
+  add_index "participants", ["coordinator_id"], name: "index_participants_on_coordinator_id"
   add_index "participants", ["name", "gender", "dob"], name: "index_participants_on_name_and_gender_and_dob"
 
   create_table "registries", force: true do |t|
@@ -54,7 +56,7 @@ ActiveRecord::Schema.define(version: 20161101021903) do
     t.datetime "updated_at"
   end
 
-  add_index "registries", ["name", "location"], name: "index_registries_on_name_and_location"
+  add_index "registries", ["name", "location"], name: "index_registries_on_name_and_location", unique: true
 
   create_table "registry_coordinators", force: true do |t|
     t.integer  "coordinator_id"
