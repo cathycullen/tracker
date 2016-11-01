@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  coordinator_id: 
+  registry_id: 
+
+two:
+  coordinator_id: 
+  registry_id: 
