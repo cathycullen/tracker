@@ -11,4 +11,5 @@ Bonuses Implemented:
 	•	Provide SQL for aggregate count of participants by year of birth.
 	•	Provide SQL for aggregate count of participants by coordinator and gender.
 	•	Export participants for each coordinator in a CSV format.
-  
+
+To display Coordinators by participant as .csv : localhost:3000/participants.csv

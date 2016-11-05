@@ -23,4 +23,13 @@ class Participant < ActiveRecord::Base
   def joiner
     Coordinator.joins(:participants).first
   end
+
+  def self.to_csv(options = {})
+  CSV.generate(options) do |csv|
+    csv << column_names
+    all.each do |participant|
+      csv << participant.attributes.values_at(*column_names)
+    end
+  end
+end
 end

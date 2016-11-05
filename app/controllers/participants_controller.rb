@@ -4,7 +4,12 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
   def index
-    @participants = Participant.all
+    @participants = Participant.order(:name)
+    respond_to do |format|
+     format.html
+     format.csv { send_data @participants.to_csv }
+     format.xls  { send_data @participants.to_csv(col_sep: "\t") }
+    end
   end
 
   # GET /participants/1
