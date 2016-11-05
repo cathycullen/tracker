@@ -1,13 +1,12 @@
 == README
 
-Ruby on Rails application that allows a coordinator to track participants across
-multiple registries.
+Ruby on Rails application that allows a coordinator to track clinical trial participants across
+multiple studies.
 
 * Ruby version  2.2.2
 * Rails version 4.0.0
 * Database PostgreSQL
 
-Bonuses Implemented:
 	•	Provide SQL for aggregate count of participants by year of birth.
 	•	Provide SQL for aggregate count of participants by coordinator and gender.
 	•	Export participants for each coordinator in a CSV format.
