@@ -1,31 +1,40 @@
-<h1>Listing coordinators</h1>
 
-<table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <h4>Coordinators</h4>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th>Email</th>
       <th>Name</th>
+      <th>Email</th>
       <th>Phone</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @coordinators.each do |coordinator| %>
+      <% @coordinators.each do |coordinator| %>
       <tr>
-        <td><%= coordinator.email %></td>
         <td><%= coordinator.name %></td>
+        <td><%= coordinator.email %></td>
         <td><%= coordinator.phone %></td>
-        <td><%= link_to 'Show', coordinator %></td>
-        <td><%= link_to 'Edit', edit_coordinator_path(coordinator) %></td>
-        <td><%= link_to 'Destroy', coordinator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to coordinator, class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_coordinator_path(coordinator), class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon  glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to 'Delete', coordinator, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-default  btn-sm" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
+</div>
 
-<%= link_to 'New Coordinator', new_coordinator_path %>
+<%= link_to new_coordinator_path, class: 'btn btn-success' do %>
+    <i class="glyphicon glyphicon-plus"></i> New Coordinator
+<% end %>

@@ -1,3 +1,4 @@
+
 class RegistriesController < ApplicationController
   before_action :set_registry, only: [:show, :edit, :update, :destroy]
 
@@ -15,6 +16,7 @@ class RegistriesController < ApplicationController
   # GET /registries/new
   def new
     @registry = Registry.new
+    @coordinator_ids = Coordinator.get_ids
   end
 
   # GET /registries/1/edit
@@ -24,11 +26,14 @@ class RegistriesController < ApplicationController
   # POST /registries
   # POST /registries.json
   def create
+    coordinator_id = params["registry"]["coordinator_id"].to_i
     @registry = Registry.new(registry_params)
-
+    @coordinator = Coordinator.find(coordinator_id)
     respond_to do |format|
       if @registry.save
-        format.html { redirect_to @registry, notice: 'Registry was successfully created.' }
+        @registry_coordinator = RegistryCoordinator.create!(:coordinator => @coordinator,
+                                                            :registry => @registry)
+        format.html { redirect_to registries_url, notice: 'Registry was successfully created.' }
         format.json { render action: 'show', status: :created, location: @registry }
       else
         format.html { render action: 'new' }
@@ -42,7 +47,7 @@ class RegistriesController < ApplicationController
   def update
     respond_to do |format|
       if @registry.update(registry_params)
-        format.html { redirect_to @registry, notice: 'Registry was successfully updated.' }
+        format.html { redirect_to registries_url, notice: 'Registry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

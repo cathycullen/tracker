@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :state %><br>
-    <%= f.select :state, options_for_select([ "open", "closed" ]) %>
+    <%= f.select :state, options_for_select([ "open", "closed" ], @registry.state) %>
 
   </div>
   <div class="field">

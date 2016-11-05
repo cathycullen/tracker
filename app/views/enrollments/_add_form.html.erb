@@ -1,0 +1,38 @@
+:html => {:class => "form-vertical"}
+<%= form_for(@enrollment, :html => {:class => "form-vertical"},
+                          :url => { :action => 'add_participant',
+                          :registry_id => @registry_id }) do |f| %>
+  <% if @enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+      <ul>
+      <% @enrollment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :enrollment_date %><br>
+    <%= f.date_field :enrollment_date, :value => Date.today %>
+  </div>
+  <div class="field">
+    <%= f.label :participant_id %><br>
+    <%= f.collection_select :participant_id, Participant.order(:name), :id, :name, {}, {class: "store-select"} %>
+  </div>
+  <div class="field">
+    <%= f.label :coordinator_id %><br>
+    <%= f.collection_select :coordinator_id, Coordinator.order(:name), :id, :name, {}, {class: "store-select"} %>
+  </div>
+  <div class="field">
+    <%= f.label :method_of_contact %><br>
+    <%= f.select :method_of_contact, options_for_select([ "phone", "email" ], "email") %>
+  </div>
+  <div class="field">
+    <%= f.label :remarks %><br>
+    <%= f.text_area :remarks %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add Participant to Registry" %>
+  </div>
+<% end %>

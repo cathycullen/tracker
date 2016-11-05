@@ -1,4 +1,5 @@
 Tracker::Application.routes.draw do
+
   resources :participants
 
   resources :coordinators
@@ -7,7 +8,12 @@ Tracker::Application.routes.draw do
 
   resources :registry_coordinators
 
-  root :to =>'registry_coordinators#index'
+  resources :enrollments
+
+  root :to =>'registries#index'
+
+  get 'enrollments/:id/add' => 'enrollments#add', as: 'add_enrollment'
+  patch 'enrollments/:id/add_participant' => 'enrollments#add_participant', as: 'add_enrollment_particpant'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,19 +1,53 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @coordinator.email %>
+  <strong>Coordinator:
+  <%= @coordinator.name %></strong>
 </p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <p>
+      <strong>Email:</strong>
+      <%= @coordinator.email %>
+    </p>
+    <p>
+      <strong>Phone:</strong>
+      <%= @coordinator.phone %>
+    </p>
+    <div class="panel-title">
+      <p><strong>All Participants Enrolled by <%= @coordinator.name %></strong></p>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Dob</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @coordinator.participants.each do |participant| %>
+      <tr>
+        <td><%= participant.name %></td>
+        <td><%= participant.gender %></td>
+        <td><%= participant.dob %></td>
+        <td><%= participant.phone %></td>
+        <td><%= participant.email %></td>
 
-<p>
-  <strong>Name:</strong>
-  <%= @coordinator.name %>
-</p>
+        <td>
+          <%= link_to edit_participant_path(participant), class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon  glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to 'Delete', participant, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-default  btn-sm" %>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @coordinator.phone %>
-</p>
-
-<%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
-<%= link_to 'Back', coordinators_path %>
+          <%= link_to new_participant_path, class: 'btn btn-success btn-sm' do %>
+              <i class="glyphicon glyphicon-plus"></i>Add
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+</div>

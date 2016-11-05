@@ -10,22 +10,21 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
+    <%= f.select :gender, options_for_select([ "male", "female" ], "male") %>
   </div>
   <div class="field">
     <%= f.label :dob %><br>
-    <%= f.date_select :dob %>
+    <%= f.date_field :dob %>
   </div>
   <div class="field">
-    <%= f.label :enrollment_date %><br>
-    <%= f.date_select :enrollment_date %>
+    <%= f.label :coordinator_id %><br>
+    <%= f.collection_select :coordinator_id, Coordinator.order(:name), :id, :name, {}, {class: "store-select"} %>
   </div>
   <div class="field">
     <%= f.label :phone %><br>
@@ -34,14 +33,6 @@
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :method_of_contact %><br>
-    <%= f.text_field :method_of_contact %>
-  </div>
-  <div class="field">
-    <%= f.label :remarks %><br>
-    <%= f.text_area :remarks %>
   </div>
   <div class="actions">
     <%= f.submit %>

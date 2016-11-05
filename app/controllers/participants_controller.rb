@@ -15,6 +15,7 @@ class ParticipantsController < ApplicationController
   # GET /participants/new
   def new
     @participant = Participant.new
+    @coordinator_ids = Coordinator.get_ids
   end
 
   # GET /participants/1/edit
@@ -28,7 +29,7 @@ class ParticipantsController < ApplicationController
 
     respond_to do |format|
       if @participant.save
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
+        format.html { redirect_to participants_url, notice: 'Participant was successfully created.' }
         format.json { render action: 'show', status: :created, location: @participant }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class ParticipantsController < ApplicationController
   def update
     respond_to do |format|
       if @participant.update(participant_params)
-        format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
+        format.html { redirect_to participants_url, notice: 'Participant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +70,6 @@ class ParticipantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participant_params
-      params.require(:participant).permit(:name, :gender, :dob, :enrollment_date, :phone, :email, :method_of_contact, :remarks)
+      params.require(:participant).permit(:name, :gender, :dob, :enrollment_date, :coordinator_id, :phone, :email, :method_of_contact, :remarks)
     end
 end

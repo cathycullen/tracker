@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101042212) do
+ActiveRecord::Schema.define(version: 20161105180207) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "coordinators", force: true do |t|
     t.string   "email"
@@ -19,34 +22,39 @@ ActiveRecord::Schema.define(version: 20161101042212) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "participant_id"
   end
+
+  add_index "coordinators", ["participant_id"], name: "index_coordinators_on_participant_id", using: :btree
 
   create_table "enrollments", force: true do |t|
     t.integer  "participant_id"
     t.integer  "registry_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "enrollment_date"
+    t.string   "method_of_contact"
+    t.string   "remarks"
+    t.integer  "coordinator_id"
   end
 
-  add_index "enrollments", ["participant_id"], name: "index_enrollments_on_participant_id"
-  add_index "enrollments", ["registry_id"], name: "index_enrollments_on_registry_id"
+  add_index "enrollments", ["participant_id", "registry_id"], name: "index_enrollments_on_participant_id_and_registry_id", unique: true, using: :btree
+  add_index "enrollments", ["participant_id"], name: "index_enrollments_on_participant_id", using: :btree
+  add_index "enrollments", ["registry_id"], name: "index_enrollments_on_registry_id", using: :btree
 
   create_table "participants", force: true do |t|
     t.string   "name"
     t.string   "gender"
     t.date     "dob"
-    t.date     "enrollment_date"
     t.string   "phone"
     t.string   "email"
-    t.string   "method_of_contact"
-    t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "coordinator_id"
   end
 
-  add_index "participants", ["coordinator_id"], name: "index_participants_on_coordinator_id"
-  add_index "participants", ["name", "gender", "dob"], name: "index_participants_on_name_and_gender_and_dob"
+  add_index "participants", ["coordinator_id"], name: "index_participants_on_coordinator_id", using: :btree
+  add_index "participants", ["name", "gender", "dob"], name: "index_participants_on_name_and_gender_and_dob", using: :btree
 
   create_table "registries", force: true do |t|
     t.string   "name"
@@ -56,7 +64,7 @@ ActiveRecord::Schema.define(version: 20161101042212) do
     t.datetime "updated_at"
   end
 
-  add_index "registries", ["name", "location"], name: "index_registries_on_name_and_location", unique: true
+  add_index "registries", ["name", "location"], name: "index_registries_on_name_and_location", unique: true, using: :btree
 
   create_table "registry_coordinators", force: true do |t|
     t.integer  "coordinator_id"
@@ -65,7 +73,8 @@ ActiveRecord::Schema.define(version: 20161101042212) do
     t.datetime "updated_at"
   end
 
-  add_index "registry_coordinators", ["coordinator_id"], name: "index_registry_coordinators_on_coordinator_id"
-  add_index "registry_coordinators", ["registry_id"], name: "index_registry_coordinators_on_registry_id"
+  add_index "registry_coordinators", ["coordinator_id", "registry_id"], name: "index_registry_coordinators_on_coordinator_id_and_registry_id", unique: true, using: :btree
+  add_index "registry_coordinators", ["coordinator_id"], name: "index_registry_coordinators_on_coordinator_id", using: :btree
+  add_index "registry_coordinators", ["registry_id"], name: "index_registry_coordinators_on_registry_id", using: :btree
 
 end

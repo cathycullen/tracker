@@ -1,27 +1,44 @@
-<h1>Listing registry_coordinators</h1>
 
-<table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <h4>Registries By Coordinator</h4>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Coordinator Name</th>
+      <th>Registry Id</th>
+      <th>Registry Name</th>
+      <th>Location</th>
+      <th>State</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @registry_coordinators.each do |registry_coordinator| %>
+        <% @registry_coordinators.each do |registry_coordinator| %>
       <tr>
-        <td><%= registry_coordinator.coordinator_id %></td>
-        <td><%= registry_coordinator.registry_id %></td>
-        <td><%= link_to 'Show', registry_coordinator %></td>
-        <td><%= link_to 'Edit', edit_registry_coordinator_path(registry_coordinator) %></td>
-        <td><%= link_to 'Destroy', registry_coordinator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= registry_coordinator.coordinator.name %></td>
+        <td><%= registry_coordinator.registry.id %></td>
+        <td><%= registry_coordinator.registry.name %></td>
+        <td><%= registry_coordinator.registry.location %></td>
+        <td><%= registry_coordinator.registry.state %></td>
+        <td>
+          <%= link_to registry_coordinator, class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_participant_path(registry_coordinator), class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon  glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to 'Delete', registry_coordinator, method: :delete, data: { confirm: 'Are you sure?' },  class: "btn btn-default  btn-sm" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
+</div>
 
-<%= link_to 'New Registry coordinator', new_registry_coordinator_path %>
+<%= link_to new_registry_coordinator_path, class: 'btn btn-success' do %>
+    <i class="glyphicon glyphicon-plus"></i> New Registry Coordinator
+<% end %>

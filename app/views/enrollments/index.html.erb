@@ -1,46 +1,28 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <h4>Registry Name:
-  <%= @registry.name %></h4>
-</p>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <p>
-      <strong>Location:</strong>
-      <%= @registry.location %>
-    </p>
-    <p>
-      <strong>State:</strong>
-      <%= @registry.state %>
-    </p>
     <div class="panel-title">
-      <p><strong>Participants Enrolled in This Registry</strong></p>
+      <h4>All Enrollments</h4>
     </div>
   </div>
   <table class="table table-striped table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Gender</th>
-      <th>Dob</th>
-      <th>Enrollment Date</th>
+      <th>Registry</th>
+      <th>Enroll Date</th>
       <th>Coordinator</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Method of contact</th>
+      <th>Contact</th>
       <th>Remarks</th>
     </tr>
   </thead>
   <tbody>
-      <% @registry.enrollments.each do |enrollment| %>
+        <% @enrollments.each do |enrollment| %>
       <tr>
         <td><%= enrollment.participant.name %></td>
-        <td><%= enrollment.participant.gender %></td>
-        <td><%= enrollment.participant.dob %></td>
+        <td><%= enrollment.registry.name %></td>
         <td><%= enrollment.enrollment_date %></td>
         <td><%= enrollment.coordinator.name %></td>
-        <td><%= enrollment.participant.phone %></td>
-        <td><%= enrollment.participant.email %></td>
         <td><%= enrollment.method_of_contact %></td>
         <td><%= enrollment.remarks %></td>
         <td>
@@ -56,6 +38,6 @@
 <br>
 </div>
 
-<%= link_to new_enrollment_path(:registry_id => @registry.id), class: 'btn btn-success btn-sm' do %>
-    <i class="glyphicon glyphicon-plus"></i>Add Participant to Registry
+<%= link_to new_enrollment_path, class: 'btn btn-success' do %>
+    <i class="glyphicon glyphicon-plus"></i> New Enrollment
 <% end %>
