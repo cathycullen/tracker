@@ -35,7 +35,6 @@ class EnrollmentsController < ApplicationController
     @registry_id = params[:registry_id]
     #@enrollment = Enrollment.find(params["id"])
     @enrollment = Enrollment.new
-    binding.pry
   end
   # POST /enrollments/1/add_participant
   def add_participant

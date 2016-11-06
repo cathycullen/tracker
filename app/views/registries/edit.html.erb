@@ -1,6 +1,3 @@
-<h1>Editing registry</h1>
 
-<%= render 'edit_form' %>
-
-<%= link_to 'Show', @registry %> |
+<%= render partial: 'form', :locals => {:operation => "Edit "}  %>
 <%= link_to 'Back', registries_path %>

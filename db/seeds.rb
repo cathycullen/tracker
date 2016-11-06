@@ -40,35 +40,35 @@ participant1 = Participant.create!(:name => 'Ruby Red',
                     :dob => '1965-06-01',
                     :phone => '312-123-4567',
                     :email => 'ruby@gmail.com',
-                    :coordinator_id => 1
+                    :coordinator => coordinator1
                     )
 participant2 = Participant.create!(:name => 'Nancy Blue',
                     :gender => 'female',
                     :dob => '1965-08-11',
                     :phone => '312-123-4567',
                     :email => 'nancy@gmail.com',
-                    :coordinator_id => 1
+                    :coordinator => coordinator1
                     )
 participant3 = Participant.create!(:name => 'Jen Black',
                     :gender => 'female',
                     :dob => '1975-04-01',
                     :phone => '312-123-4567',
                     :email => 'jen@gmail.com',
-                    :coordinator_id => 2
+                    :coordinator => coordinator2
                     )
 participant4 = Participant.create!(:name => 'Cece Green',
                     :gender => 'female',
                     :dob => '1975-08-11',
                     :phone => '312-123-4567',
                     :email => 'cece@gmail.com',
-                    :coordinator_id => 2
+                    :coordinator => coordinator2
                     )
 participant5 = Participant.create!(:name => 'Jay Green',
                     :gender => 'male',
                     :dob => '1985-06-01',
                     :phone => '312-123-4567',
                     :email => 'jay@gmail.com',
-                    :coordinator_id => 1
+                    :coordinator => coordinator1
                     )
 
 participant6 = Participant.create!(:name => 'Rich Blue',
@@ -76,7 +76,7 @@ participant6 = Participant.create!(:name => 'Rich Blue',
                     :dob => '1985-02-11',
                     :phone => '312-123-4567',
                     :email => 'rich@gmail.com',
-                    :coordinator_id => 3
+                    :coordinator => coordinator3
                     )
 
 
@@ -85,9 +85,9 @@ RegistryCoordinator.create!(:coordinator => coordinator1,
 RegistryCoordinator.create!(:coordinator => coordinator1,
                               :registry => registry2)
 RegistryCoordinator.create!(:coordinator => coordinator2,
-                              :registry => registry1)
+                              :registry => registry3)
 RegistryCoordinator.create!(:coordinator => coordinator3,
-                              :registry => registry1)
+                              :registry => registry4)
 RegistryCoordinator.create!(:coordinator => coordinator3,
                               :registry => registry2)
 RegistryCoordinator.create!(:coordinator => coordinator2,
