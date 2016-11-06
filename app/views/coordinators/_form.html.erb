@@ -1,29 +1,16 @@
-<%= form_for(@coordinator) do |f| %>
-  <% if @coordinator.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@coordinator.errors.count, "error") %> prohibited this coordinator from being saved:</h2>
-
-      <ul>
-      <% @coordinator.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+<div class="row-fluid col-md-6 clearfix">
+  <div class="span4 well">
+    <%= simple_form_for @coordinator do |f| %>
+      <fieldset >
+        <legend>Coordinator</legend>
+          <%= f.input :name  %>
+        <%= f.input :email %>
+        <%= f.input :phone %>
+        <div class="form-actions">
+          <%= f.submit %>
+        </div>
+      </fieldset>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+</div>

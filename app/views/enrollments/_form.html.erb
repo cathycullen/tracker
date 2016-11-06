@@ -1,54 +1,40 @@
-<div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title">
-              <i class="fa fa-credit-card pull-right"></i>
-              <h4>New Enrollment</h4>
-            </div>
-          </div><div class="panel-body">
-<%= form_for(@enrollment, :html => {:class => "form-vertical"}) do |f| %>
-  <% if @enrollment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
 
-      <ul>
-      <% @enrollment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row-fluid col-md-6 clearfix">
+  <div class="span4 well">
+    <%= simple_form_for @enrollment do |f| %>
+      <% if @enrollment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+          <ul>
+          <% @enrollment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :enrollment_date %><br>
-    <%= f.date_field :enrollment_date %>
-  </div>
+    <fieldset >
+      <legend>New Enrollment</legend>
+      <%= f.input :enrollment_date, as: :date, html5: true %>
+      <% if @enrollment.registry.nil? %>
+        <%= f.input :registry_id, collection: @open_registries, label_method: :name,
+            value_method: :id, label: "Registry", include_blank: false %>
+      <% else %>
+        <%= f.input :registry_id, collection: @open_registries, label_method: :name,
+            value_method: :id, label: "Registry", include_blank: false, selected: @enrollment.registry.id  %>
+      <% end %>
+      <%= f.input :participant_id, collection: @participants, label_method: :name,
+            value_method: :id, label: "Participant", include_blank: false %>
 
-  <div class="field">
-    <%= f.label :registry_id %><br>
-    <% if @enrollment.registry.nil? %>
-      <%= f.collection_select :registry_id, Registry.order(:name), :id, :name, {}, {class: "store-select"} %>
-    <% else %>
-      <%= f.collection_select :registry_id, Registry.order(:name), :id, :name, {:selected => @enrollment.registry.id }, {class: "store-select"} %>
+      <%= f.input :coordinator_id, collection: @coordinators, label_method: :name,
+            value_method: :id, label: "Coordinator", include_blank: false %>
+      <%= f.input :method_of_contact, collection: ["phone", "email"] %>
+      <%= f.input :remarks %>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </fieldset >
     <% end %>
   </div>
-  <div class="field">
-    <%= f.label :participant_id %><br>
-    <%= f.collection_select :participant_id, Participant.order(:name), :id, :name, {}, {class: "store-select"} %>
-  </div>
-  <div class="field">
-    <%= f.label :coordinator_id %><br>
-    <%= f.collection_select :coordinator_id, Coordinator.order(:name), :id, :name, {}, {class: "store-select"} %>
-  </div>
-  <div class="field">
-    <%= f.label :method_of_contact %><br>
-    <%= f.select :method_of_contact, options_for_select([ "phone", "email" ]) %>
-  </div>
-  <div class="field">
-    <%= f.label :remarks %><br>
-    <%= f.text_area :remarks %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
 </div>
 </div>

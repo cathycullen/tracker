@@ -15,9 +15,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    @coordinator_ids = Coordinator.get_ids
-    @open_registry_ids = Registry.open_registry_ids
-    @participant_ids = Participant.get_ids
+    @open_registries = Registry.open_registries
+    @coordinators = Coordinator.order(:name)
+    @participants = Participant.order(:name)
     if params[:registry_id]
       @enrollment.registry = Registry.find(params[:registry_id])
     end
@@ -25,8 +25,9 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/1/edit
   def edit
-    puts "hello from enrollments edit #{params}"
-    @registry_id = params[:registry_id]
+    @registries = Registry.open_registries
+    @coordinators = Coordinator.order(:name)
+    @participants = Participant.order(:name)
   end
 
     # GET /enrollments/1/add
@@ -59,7 +60,7 @@ class EnrollmentsController < ApplicationController
     binding.pry
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to @enrollment, notice: 'Enrollment was successfully created.' }
+        format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @enrollment }
       else
         format.html { render action: 'new' }

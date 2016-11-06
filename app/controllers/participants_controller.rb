@@ -20,11 +20,12 @@ class ParticipantsController < ApplicationController
   # GET /participants/new
   def new
     @participant = Participant.new
-    @coordinator_ids = Coordinator.get_ids
+    @coordinators = Coordinator.order(:name)
   end
 
   # GET /participants/1/edit
   def edit
+    @coordinators = Coordinator.order(:name)
   end
 
   # POST /participants

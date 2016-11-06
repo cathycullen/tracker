@@ -28,7 +28,7 @@ class CoordinatorsController < ApplicationController
 
     respond_to do |format|
       if @coordinator.save
-        format.html { redirect_to @coordinator, notice: 'Coordinator was successfully created.' }
+        format.html { redirect_to coordinators_url, notice: 'Coordinator was successfully created.' }
         format.json { render action: 'show', status: :created, location: @coordinator }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class CoordinatorsController < ApplicationController
   def update
     respond_to do |format|
       if @coordinator.update(coordinator_params)
-        format.html { redirect_to @coordinator, notice: 'Coordinator was successfully updated.' }
+        format.html { redirect_to coordinators_url, notice: 'Coordinator was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -11,6 +11,10 @@ class Registry < ActiveRecord::Base
     Registry.where("state = 'open'").uniq.pluck(:id)
   end
 
+  def self.open_registries
+    Registry.where("state = 'open'")
+  end
+
   def coordinator_id
   end
 
