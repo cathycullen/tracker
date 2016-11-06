@@ -14,21 +14,20 @@
         </div>
       <% end %>
     <fieldset >
-      <legend>New Enrollment</legend>
+      <legend><%= operation %> Enrollment</legend>
       <%= f.input :enrollment_date, as: :date, html5: true %>
-      <% if @enrollment.registry.nil? %>
-        <%= f.input :registry_id, collection: @open_registries, label_method: :name,
-            value_method: :id, label: "Registry", include_blank: false %>
-      <% else %>
-        <%= f.input :registry_id, collection: @open_registries, label_method: :name,
-            value_method: :id, label: "Registry", include_blank: false, selected: @enrollment.registry.id  %>
-      <% end %>
+
+      <%= f.input :registry_id, collection: @open_registries, label_method: :name,
+          value_method: :id, label: "Registry", include_blank: false %>
+
       <%= f.input :participant_id, collection: @participants, label_method: :name,
             value_method: :id, label: "Participant", include_blank: false %>
 
       <%= f.input :coordinator_id, collection: @coordinators, label_method: :name,
             value_method: :id, label: "Coordinator", include_blank: false %>
-      <%= f.input :method_of_contact, collection: ["phone", "email"] %>
+
+      <%= f.input :method_of_contact, collection: ["phone", "email"], include_blank: false %>
+
       <%= f.input :remarks %>
       <div class="actions">
         <%= f.submit %>
