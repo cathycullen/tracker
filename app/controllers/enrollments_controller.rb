@@ -56,7 +56,6 @@ class EnrollmentsController < ApplicationController
   def create
     @enrollment = Enrollment.new(enrollment_params)
 
-    binding.pry
     respond_to do |format|
       if @enrollment.save
         format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully created.' }
