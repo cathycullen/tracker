@@ -1,15 +1,27 @@
 == README
 
+<<<<<<< HEAD
 Ruby on Rails application that allows a coordinator to track participants across
 multiple registries.
+=======
+Ruby on Rails application that allows a coordinator to track clinical trial participants across
+multiple studies.
+>>>>>>> 1598337e90371b3d55c97c03f557d62992942bc3
 
 * Ruby version  2.2.2
 * Rails version 4.0.0
 * Database PostgreSQL
 
+<<<<<<< HEAD
 Bonuses Implemented:
 	•	Provide SQL for aggregate count of participants by year of birth.
 	•	Provide SQL for aggregate count of participants by coordinator and gender.
 	•	Export participants for each coordinator in a CSV format.
 
 To display Coordinators by participant as .csv : localhost:3000/participants.csv
+=======
+	•	Provide SQL for aggregate count of participants by year of birth.
+	•	Provide SQL for aggregate count of participants by coordinator and gender.
+	•	Export participants for each coordinator in a CSV format.
+  
+>>>>>>> 1598337e90371b3d55c97c03f557d62992942bc3

@@ -37,9 +37,12 @@ group :doc do
 end
 gem 'simple_form'
 
-gem 'pry-rails', :group => :development
-gem 'pry-stack_explorer', :group => :development
+#gem 'pry-rails', :group => :development
+#gem 'pry-stack_explorer', :group => :development
 
+gem 'rails_12factor', group: :production
+
+ruby '2.2.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
