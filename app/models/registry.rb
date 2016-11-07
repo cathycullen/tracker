@@ -6,6 +6,7 @@ class Registry < ActiveRecord::Base
   has_many :participants, :through => :enrollments
 
   validates_presence_of :name, :location, :state
+  validates_inclusion_of :state, :in => %w( open closed )
 
   def self.open_registry_ids
     Registry.where("state = 'open'").uniq.pluck(:id)

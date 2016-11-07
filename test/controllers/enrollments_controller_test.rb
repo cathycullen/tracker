@@ -18,7 +18,7 @@ class EnrollmentsControllerTest < ActionController::TestCase
 
   test "should create enrollment" do
     assert_difference('Enrollment.count') do
-      post :create, enrollment: {  }
+      post :create, enrollment: { enrollment_date: @enrollment.enrollment_date, method_of_contact: @enrollment.method_of_contact, name: @enrollment.name, phone: @enrollment.phone, remarks: @enrollment.remarks }
     end
 
     assert_redirected_to enrollment_path(assigns(:enrollment))

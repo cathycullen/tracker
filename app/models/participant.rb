@@ -3,6 +3,7 @@ class Participant < ActiveRecord::Base
   has_many :registries, :through => :enrollments
 
   validates_presence_of :name, :gender, :dob
+  validates_inclusion_of :gender, :in => %w( male female )
 
   belongs_to :coordinator
 
@@ -18,10 +19,6 @@ class Participant < ActiveRecord::Base
     sql = "SELECT coordinators.name,  participants.gender, COUNT(*) FROM participants, coordinators where coordinators.id = participants.coordinator_id  GROUP BY coordinators.name, gender ORDER BY coordinators.name"
     result = ActiveRecord::Base.connection.execute(sql)
     result.values
-  end
-
-  def joiner
-    Coordinator.joins(:participants).first
   end
 
   def self.to_csv(options = {})
