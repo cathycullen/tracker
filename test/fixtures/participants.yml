@@ -4,18 +4,12 @@ one:
   name: MyString
   gender: MyString
   dob: 2016-10-31
-  enrollment_date: 2016-10-31
   phone: MyString
   email: MyString
-  method_of_contact: MyString
-  remarks: MyText
 
 two:
   name: MyString
   gender: MyString
   dob: 2016-10-31
-  enrollment_date: 2016-10-31
   phone: MyString
   email: MyString
-  method_of_contact: MyString
-  remarks: MyText

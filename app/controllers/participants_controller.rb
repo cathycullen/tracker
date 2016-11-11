@@ -15,6 +15,7 @@ class ParticipantsController < ApplicationController
   # GET /participants/1
   # GET /participants/1.json
   def show
+    fresh_when last_modified: @participant.updated_at
   end
 
   # GET /participants/new

@@ -2,7 +2,7 @@ class Participant < ActiveRecord::Base
   has_many :enrollments
   has_many :registries, :through => :enrollments
 
-  validates_presence_of :name, :gender, :dob
+  validates_presence_of :name, :gender, :dob, :phone, :email
   validates_inclusion_of :gender, :in => %w( male female )
 
   belongs_to :coordinator
@@ -21,12 +21,22 @@ class Participant < ActiveRecord::Base
     result.values
   end
 
+  def self.query_by_coordinator_and_gender2
+    query = <<-SQL
+    SELECT coordinators.name,  participants.gender, COUNT(*) FROM
+          participants, coordinators where
+          coordinators.id = participants.coordinator_id
+          GROUP BY coordinators.name, gender
+          ORDER BY coordinators.name
+    SQL
+    self.find_by_sql(query)
+  end
   def self.to_csv(options = {})
-  CSV.generate(options) do |csv|
-    csv << column_names
-    all.each do |participant|
-      csv << participant.attributes.values_at(*column_names)
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |participant|
+        csv << participant.attributes.values_at(*column_names)
+      end
     end
   end
-end
 end

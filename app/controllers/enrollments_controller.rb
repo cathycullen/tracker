@@ -1,5 +1,8 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :set_coordinators, only: [:new, :edit]
+  before_action :set_participants, only: [:new, :edit]
+  before_action :set_open_registries, only: [:new, :edit]
 
   # GET /enrollments
   # GET /enrollments.json
@@ -15,9 +18,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    @open_registries = Registry.open_registries
-    @coordinators = Coordinator.order(:name)
-    @participants = Participant.order(:name)
+    @enrollment.enrollment_date = Date.today
     if params[:registry_id]
       @enrollment.registry = Registry.find(params[:registry_id])
     end
@@ -25,15 +26,11 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/1/edit
   def edit
-    @registries = Registry.open_registries
-    @coordinators = Coordinator.order(:name)
-    @participants = Participant.order(:name)
   end
 
     # GET /enrollments/1/add
   def add
     @registry_id = params[:registry_id]
-    #@enrollment = Enrollment.find(params["id"])
     @enrollment = Enrollment.new
   end
   # POST /enrollments/1/add_participant
@@ -94,6 +91,18 @@ class EnrollmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
       @enrollment = Enrollment.find(params[:id])
+    end
+
+    def set_coordinators
+      @coordinators = Coordinator.order(:name)
+    end
+
+    def set_participants
+      @participants = Participant.order(:name)
+    end
+
+    def set_open_registries
+      @open_registries = Registry.open_registries
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

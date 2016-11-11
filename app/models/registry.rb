@@ -8,15 +8,8 @@ class Registry < ActiveRecord::Base
   validates_presence_of :name, :location, :state
   validates_inclusion_of :state, :in => %w( open closed )
 
-  def self.open_registry_ids
-    Registry.where("state = 'open'").uniq.pluck(:id)
-  end
-
-  def self.open_registries
-    Registry.where("state = 'open'")
-  end
+  self.scope :open_registries, -> { where(state: 'open') }
 
   def coordinator_id
   end
-
 end

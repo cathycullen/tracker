@@ -7,5 +7,4 @@ class Enrollment < ActiveRecord::Base
   validates_presence_of :remarks, :allow_blank => true
   validates_uniqueness_of :registry_id, :scope => :participant_id
 
-
 end
