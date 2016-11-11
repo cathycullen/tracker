@@ -17,7 +17,11 @@
       <legend><%= operation %> Registry</legend>
       <%= f.input :name %>
       <%= f.input :location %>
-      <%= f.input :state, collection: ["open", "closed"], include_blank: false %>
+      <% if operation == 'Add ' %>
+        <%= f.input :state, collection: ["open"], include_blank: false %>
+      <% else %>
+        <%= f.input :state, collection: ["open", "closed"], include_blank: false %>
+      <% end %>
       <%= f.input :coordinator_id, collection: Coordinator.order(:name), label_method: :name,
                   value_method: :id, label: "Coordinator", include_blank: false %>
       <div class="actions">

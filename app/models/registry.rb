@@ -6,7 +6,8 @@ class Registry < ActiveRecord::Base
   has_many :participants, :through => :enrollments
 
   validates_presence_of :name, :location, :state
-  validates_inclusion_of :state, :in => %w( open closed )
+  validates_inclusion_of :state, :in => %w( open closed ), on: :update
+  validates_inclusion_of :state, :in => %w( open ), on: :create
 
   self.scope :open_registries, -> { where(state: 'open') }
 
